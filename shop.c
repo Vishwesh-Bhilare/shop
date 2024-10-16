@@ -29,11 +29,17 @@ int main() {
                 displayElectronics();
                 printf("Enter the item number you want to buy: ");
                 scanf("%d", &subChoice);
+                if(subChoice>3){
+                    printf("Invalid Item Number! Please enter a value between 1 and 3.\n",subChoice);
+                    
+                }
+                    else{
                 printf("Enter the quantity: ");
                 scanf("%d", &quantity);
                 if (quantity < 1 || quantity > MAX_ITEMS) {
                     printf("Invalid quantity! Please enter a value between 1 and %d.\n", MAX_ITEMS);
                     break;
+                }
                 }
                 switch (subChoice) {
                     case 1: // Mobile Phone
@@ -63,11 +69,18 @@ int main() {
                 displayClothing();
                 printf("Enter the item number you want to buy: ");
                 scanf("%d", &subChoice);
+                  if(subChoice>3){
+                    printf("Invalid Item Number! Please enter a value between 1 and 3.\n",subChoice);
+                    
+                }
+                    else{
                 printf("Enter the quantity: ");
                 scanf("%d", &quantity);
+              
                 if (quantity < 1 || quantity > MAX_ITEMS) {
                     printf("Invalid quantity! Please enter a value between 1 and %d.\n", MAX_ITEMS);
                     break;
+                }
                 }
                 switch (subChoice) {
                     case 1: // T-Shirt
@@ -97,11 +110,17 @@ int main() {
                 displayToys();
                 printf("Enter the item number you want to buy: ");
                 scanf("%d", &subChoice);
+                  if(subChoice>3){
+                    printf("Invalid item Number! Please enter a value between 1 and 3.\n",subChoice);
+                    
+                }
+                    else{
                 printf("Enter the quantity: ");
                 scanf("%d", &quantity);
                 if (quantity < 1 || quantity > MAX_ITEMS) {
                     printf("Invalid quantity! Please enter a value between 1 and %d.\n", MAX_ITEMS);
                     break;
+                }
                 }
                 switch (subChoice) {
                     case 1: // Action Figure

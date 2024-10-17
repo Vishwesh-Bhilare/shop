@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h> // For sleep() function
+#include <stdlib.h> // For clearing input buffer
 
 #define MAX_ITEMS 100
 
@@ -11,6 +12,17 @@ float calculateDiscount(float totalBill, int totalQuantity);
 void displayCart(int cart[][2], int itemCount, float totalBill);
 void loading(); // Function to show loading dots
 
+// Function to handle invalid input for integers
+int getValidInput() {
+    int value;
+    while (scanf("%d", &value) != 1) {
+        printf("Invalid input! Please enter a valid integer: ");
+        // Clear input buffer
+        while (getchar() != '\n'); // Flush the input buffer
+    }
+    return value;
+}
+
 int main() {
     int choice, subChoice, quantity;
     float totalBill = 0;
@@ -21,26 +33,25 @@ int main() {
     do {
         displayMenu();
         printf("Enter your choice (1-3), or 0 to checkout: ");
-        scanf("%d", &choice);
+        choice = getValidInput(); // Use getValidInput for choice
         loading(); // Show loading effect
 
         switch (choice) {
             case 1: // Electronics
                 displayElectronics();
                 printf("Enter the item number you want to buy: ");
-                scanf("%d", &subChoice);
-                if(subChoice>3){
-                    printf("Invalid Item Number! Please enter a value between 1 and 3.\n",subChoice);
-                    
+                subChoice = getValidInput(); // Use getValidInput for subChoice
+                if (subChoice > 3 || subChoice < 1) {
+                    printf("Invalid Item Number! Please enter a value between 1 and 3.\n");
+                    break;
                 }
-                    else{
                 printf("Enter the quantity: ");
-                scanf("%d", &quantity);
+                quantity = getValidInput(); // Use getValidInput for quantity
                 if (quantity < 1 || quantity > MAX_ITEMS) {
                     printf("Invalid quantity! Please enter a value between 1 and %d.\n", MAX_ITEMS);
                     break;
                 }
-                }
+
                 switch (subChoice) {
                     case 1: // Mobile Phone
                         totalBill += quantity * 15000;
@@ -54,9 +65,6 @@ int main() {
                         totalBill += quantity * 2000;
                         cart[itemCount][0] = 3; // Headphones
                         break;
-                    default:
-                        printf("Invalid item choice.\n");
-                        continue; // Go back to the main menu
                 }
                 cart[itemCount][1] = quantity; // Store quantity
                 itemCount++;
@@ -68,20 +76,18 @@ int main() {
             case 2: // Clothing
                 displayClothing();
                 printf("Enter the item number you want to buy: ");
-                scanf("%d", &subChoice);
-                  if(subChoice>3){
-                    printf("Invalid Item Number! Please enter a value between 1 and 3.\n",subChoice);
-                    
+                subChoice = getValidInput(); // Use getValidInput for subChoice
+                if (subChoice > 3 || subChoice < 1) {
+                    printf("Invalid Item Number! Please enter a value between 1 and 3.\n");
+                    break;
                 }
-                    else{
                 printf("Enter the quantity: ");
-                scanf("%d", &quantity);
-              
+                quantity = getValidInput(); // Use getValidInput for quantity
                 if (quantity < 1 || quantity > MAX_ITEMS) {
                     printf("Invalid quantity! Please enter a value between 1 and %d.\n", MAX_ITEMS);
                     break;
                 }
-                }
+
                 switch (subChoice) {
                     case 1: // T-Shirt
                         totalBill += quantity * 500;
@@ -95,9 +101,6 @@ int main() {
                         totalBill += quantity * 3000;
                         cart[itemCount][0] = 6; // Jacket
                         break;
-                    default:
-                        printf("Invalid item choice.\n");
-                        continue; // Go back to the main menu
                 }
                 cart[itemCount][1] = quantity; // Store quantity
                 itemCount++;
@@ -109,19 +112,18 @@ int main() {
             case 3: // Toys
                 displayToys();
                 printf("Enter the item number you want to buy: ");
-                scanf("%d", &subChoice);
-                  if(subChoice>3){
-                    printf("Invalid item Number! Please enter a value between 1 and 3.\n",subChoice);
-                    
+                subChoice = getValidInput(); // Use getValidInput for subChoice
+                if (subChoice > 3 || subChoice < 1) {
+                    printf("Invalid item Number! Please enter a value between 1 and 3.\n");
+                    break;
                 }
-                    else{
                 printf("Enter the quantity: ");
-                scanf("%d", &quantity);
+                quantity = getValidInput(); // Use getValidInput for quantity
                 if (quantity < 1 || quantity > MAX_ITEMS) {
                     printf("Invalid quantity! Please enter a value between 1 and %d.\n", MAX_ITEMS);
                     break;
                 }
-                }
+
                 switch (subChoice) {
                     case 1: // Action Figure
                         totalBill += quantity * 800;
@@ -135,9 +137,6 @@ int main() {
                         totalBill += quantity * 1200;
                         cart[itemCount][0] = 9; // Board Game
                         break;
-                    default:
-                        printf("Invalid item choice.\n");
-                        continue; // Go back to the main menu
                 }
                 cart[itemCount][1] = quantity; // Store quantity
                 itemCount++;
